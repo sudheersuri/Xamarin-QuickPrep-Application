@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <style>
+            .allforms
+            {
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: center;
+            }
+        </style>
+        </head>
+    <body>
+        <div class="allforms">
+        <fieldset>
+            <legend>Add Questions</legend>
+        <form  method="POST" action="/questionsapi/add/">
+            {% csrf_token %}
+            subject:
+            <select name="subopts" size="5">
+            {% for x in sub %} 
+            <option type="text" value="{{x}}">{{x}}</option><br><br>
+            {% endfor %}
+            </select>
+            <br><br>
+            question: <textarea type="text" name="q" rows="10" cols="100"></textarea><br><br>
+            answer: <textarea type="text" name="a" rows="10" cols="100"></textarea><br>
+            <input type="submit">
+        </form>
+        </fieldset>
+        <fieldset>
+            <legend>Add Subject</legend>
+        <form  method="POST" action="/questionsapi/addsub/">
+            {% csrf_token %}
+            <input type="text" name="subname"/>
+            <input type="submit">
+        </form>    
+        </fieldset>
+        </div>
+    </body>
+</html>

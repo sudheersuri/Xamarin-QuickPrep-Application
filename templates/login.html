@@ -1,0 +1,9 @@
+<html>
+    <body>
+        <form  method="POST" action="checklogin">
+            {% csrf_token %}
+            pass: <input type="password" name="pass"><br><br>
+            <input type="submit">
+        </form>
+    </body>
+</html>
