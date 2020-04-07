@@ -1,0 +1,60 @@
+<html>
+    <head>
+    <style>
+        input
+        {
+            font-size: x-large;
+        }
+        #sid
+        {
+            display:none;
+        }
+        td{
+            font-size: 20px;
+            border :1px solid black;
+            padding:5px;
+        }
+        
+    </style>
+    <script>
+        function editsub(element)
+        {
+            rowid=element.closest('tr').rowIndex;
+            colid=element.closest('tr').colIndex;
+
+            idinput=document.getElementById("sid");
+            sinput=document.getElementById("s");
+            
+
+            idinput.value=document.getElementById("sdata").rows[rowid].cells[0].innerHTML;
+
+            sinput.value=document.getElementById("sdata").rows[rowid].cells[1].innerHTML;
+      }
+    </script>
+    </head>
+    <body>
+    <table id="sdata">
+        <tr>
+            <th>Sub ID</th>
+            <th>Subject</th>
+            <th>Action</th>
+        </tr>
+    {% for x in res %}
+    <tr>
+        <td>{{x.id}}</td>
+        <td>{{x.subject}}</td>
+        <td><button id="{{x.id}}" onclick="editsub(this)">Edit</button></td>
+    </tr>
+    {% endfor %}
+    </table>
+    <br><br><br>
+    <center>
+    <form action="/questionsapi/editsubject/" method="post">
+        {% csrf_token %}
+        <input id="sid" name="sid" type="text"  />
+        <input type="text" id="s" name="s" required placeholder="subject" />
+        <input type="submit">
+    </form>
+    </center>
+    </body>
+</html>

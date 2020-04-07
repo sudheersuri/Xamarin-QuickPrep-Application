@@ -1,14 +1,18 @@
-<html>
-    <head>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             .allforms
             {
                 display: flex;
-                flex-flow: column wrap;
+                flex-flow: row wrap;
                 justify-content: center;
             }
+            a
+            {
+                font-size: 50px;
+            }
         </style>
-        </head>
     <body>
         <div class="allforms">
         <fieldset>
@@ -16,25 +20,30 @@
         <form  method="POST" action="/questionsapi/add/">
             {% csrf_token %}
             subject:
-            <select name="subopts" size="5">
+            <select name="subopts" required>
             {% for x in sub %} 
-            <option type="text" value="{{x}}">{{x}}</option><br><br>
+            <option type="text" value="{{x}}" selected >{{x}}</option><br><br>
             {% endfor %}
             </select>
             <br><br>
-            question: <textarea type="text" name="q" rows="10" cols="100"></textarea><br><br>
-            answer: <textarea type="text" name="a" rows="10" cols="100"></textarea><br>
+            question: <textarea type="text" name="q" rows="10" cols="100" required></textarea><br><br>
+            answer: <textarea type="text" name="a" rows="10" cols="100" required></textarea><br>
             <input type="submit">
         </form>
         </fieldset>
+        <hr>
         <fieldset>
             <legend>Add Subject</legend>
         <form  method="POST" action="/questionsapi/addsub/">
             {% csrf_token %}
-            <input type="text" name="subname"/>
+            <input type="text" name="subname" required/>
             <input type="submit">
         </form>    
         </fieldset>
         </div>
+        <center><a href="/questionsapi/editor/">Editor</a><br>
+            <a href="/questionsapi/subeditor/">Subject Editor</a>
+        </center>
+    
     </body>
 </html>
